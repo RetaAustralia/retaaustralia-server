@@ -2,7 +2,7 @@
 // This handles checkout sessions securely
 
 const express = require('express');
-const stripe = require('stripe')('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'); // Replace with your SECRET key (sk_test_...)
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Replace with your SECRET key (sk_test_...)
 const cors = require('cors');
 
 const app = express();
