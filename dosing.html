@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dosing & Protocol</title>
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="shortcut icon" href="favicon.ico">
+    <style>
+
+.dosing-table-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.dosing-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: inherit;
+}
+
+.dosing-table th {
+    background-color: #1e5a9e;
+    color: white;
+    text-align: left;
+    padding: 1rem;
+    border-radius: 10px 10px 0 0;
+}
+
+.dosing-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    color: #333;
+}
+
+.dosing-table tr:last-child td {
+    border-bottom: none;
+}
+
+.dosing-table tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+.dosing-table td:last-child {
+    font-weight: 700;
+    color: #1e5a9e;
+}
+
+:root {
+    --primary: #1e5a9e;
+    --primary-dark: #164a82;
+}
+
+.custom-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin: 20px 0;
+}
+
+.custom-list li {
+    margin-bottom: 12px;
+    color: #333;
+    line-height: 1.8;
+}
+
+.number-icon {
+    width: 65px;  
+    height: 65px; 
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--primary);
+    border-radius: 50%;
+    margin: 0 auto 1.5rem auto;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .values-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .mission {
+        padding: 3rem 5%;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Navigation */
+nav { 
+    background: white; 
+    padding: 0rem 5%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+    position: -webkit-sticky;
+    position: sticky; 
+    top: 0; 
+    width: 100%;
+    height: 80px;
+    z-index: 3000; 
+}
+
+.nav-container { 
+    height: 80px; 
+    max-width: 1250px; 
+    margin: 0 auto; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo img {
+    height: 100%;
+    max-height: 150px;
+    width: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover img {
+    transform: scale(1.02);
+}
+
+.nav-links { 
+    display: flex; 
+    list-style: none; 
+    margin: 0; 
+    padding: 0; 
+}
+
+.nav-links li { 
+    display: flex; 
+    align-items: center;
+}
+
+.nav-links a { 
+    text-decoration: none; 
+    color: #333; 
+    font-weight: 700; 
+    padding: 0 1.5rem; 
+    height: 80px; 
+    display: flex; 
+    align-items: center; 
+}
+
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: transparent;
+    cursor: pointer !important;
+    z-index: 2001;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.mobile-menu-btn span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #1e5a9e;
+    border-radius: 3px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.cta-nav {
+    background: #1e5a9e;
+    color: white !important;
+    padding: 0.6rem 1.5rem;
+    border-radius: 25px;
+}
+
+.cta-nav:hover {
+    background: #164a82;
+    color: white !important;
+}
+
+/* Hero Section */
+.page-hero {
+    background: linear-gradient(135deg, #1e5a9e 0%, #164a82 100%);
+    padding: 5rem 5%;
+    text-align: center;
+    color: white;
+}
+
+.page-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.page-hero p {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Story Section */
+.story {
+    padding: 5rem 5%;
+    background: white;
+}
+
+.story-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.story h2 {
+    font-size: 2.5rem;
+    color: #1a1a1a;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.story h3 {
+    font-size: 1.8rem;
+    color: #1e5a9e;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.story h4 {
+    font-size: 1.4rem;
+    color: #1a1a1a;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.story p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+.story strong {
+    color: #1a1a1a;
+}
+
+.warning-box {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+}
+
+.warning-box p {
+    color: #856404;
+    margin-bottom: 0;
+}
+
+/* Mission & Values */
+.mission {
+    padding: 5rem 5%;
+    background: #f0f7ff;
+}
+
+.mission-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.mission h2 {
+    font-size: 2.5rem;
+    color: #1a1a1a;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.value-card {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.value-card h3 {
+    font-size: 1.4rem;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+}
+
+.value-card p {
+    color: #666;
+    line-height: 1.7;
+}
+
+/* CTA Section */
+.cta-section {
+    background: linear-gradient(135deg, #1e5a9e 0%, #164a82 100%);
+    padding: 5rem 5%;
+    text-align: center;
+    color: white;
+}
+
+.cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.btn-light {
+    background: white;
+    color: #1e5a9e;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-light:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Footer */
+.site-footer {
+    background: #1a1a1a;
+    color: white;
+    padding: 4rem 5% 2rem;
+    margin-top: 4rem;
+}
+
+.footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-section h4 {
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-section a {
+    color: #ccc;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 0.95rem;
+}
+
+.footer-section a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid #333;
+    color: #888;
+    font-size: 0.9rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+@media (max-width: 968px) {
+    .mobile-menu-btn { 
+        display: flex !important;
+    }
+
+    .nav-links {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 80%;
+        height: 100vh;
+        background: white !important;
+        flex-direction: column;
+        padding: 100px 0 20px 0;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+        z-index: 2000 !important;
+        overflow-y: auto;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+    }
+
+    .nav-links.active {
+        display: flex !important;
+        transform: translateX(0);
+    }
+
+    .nav-links li {
+        width: 100%;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .nav-links a {
+        width: 100%;
+        padding: 1.2rem 2rem;
+        height: auto;
+        font-size: 1.1rem;
+        justify-content: flex-start;
+    }
+
+    .nav-links a:hover {
+        background: #f8f8f8;
+    }
+
+    .nav-links .cta-nav {
+        margin: 1.5rem 2rem;
+        text-align: center;
+        display: block;
+        width: calc(100% - 4rem);
+        padding: 1rem;
+        border-radius: 25px;
+    }
+
+    body.menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 1999;
+    }
+
+    .page-hero h1 {
+        font-size: 2rem;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2.5rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo"><img src="logo.png" alt="Reta Australia Logo"></a>
+
+            <button type="button" class="mobile-menu-btn" onclick="toggleMenu(event)" aria-label="Toggle Navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="product.html">Product</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="dosing.html">Dosing & Protocol</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="product.html" class="cta-nav">Buy Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="page-hero">
+        <h1>Dosing & Protocol Guide</h1>
+        <p>Comprehensive instructions for safe and effective use</p>
+    </section>
+
+    <!-- Process Steps -->
+    <section class="mission">
+        <div class="mission-container">
+            <h2>Your Journey in Three Steps</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="number-icon">1</div>
+                    <h3>Begin</h3>
+                    <p>Familiarize yourself with injection technique, dosing, storage, and safety protocols outlined below.</p>
+                </div>
+                <div class="value-card">
+                    <div class="number-icon">2</div>
+                    <h3>Calibrate</h3>
+                    <p>Track diet, body composition, and response. Re-evaluate and adjust dose every 4 weeks until optimal.</p>
+                </div>
+                <div class="value-card">
+                    <div class="number-icon">3</div>
+                    <h3>Maintain</h3>
+                    <p>Once established, determine your goals and duration of use based on your individual needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="story">
+        <div class="story-container">
+            <h2>Getting Started with Your Reta Australia Kit</h2>
+            
+            <p>Your kit includes a pre-loaded pen containing 10mg of retatrutide and 5 sterile needle caps. All components must be refrigerated between 2-8°C when not in use.</p>
+
+            <h3>Starting Dose Protocol</h3>
+            
+            <h4>Weeks 1-4: 2mg Weekly</h4>
+            <ul class="custom-list">
+                <li>Dial the pen to 16 clicks (8 clicks = 1mg)</li>
+                <li>Administer once per week, preferably in the evening</li>
+                <li>Rotate injection sites weekly to minimize tissue irritation</li>
+            </ul>
+
+            <h3>Administration Instructions</h3>
+            
+            <h4>Injection Sites</h4>
+            <p>Administer subcutaneously (into fatty tissue) in either:</p>
+            <ul class="custom-list">
+                <li>Abdomen (avoiding 2 inches around navel)</li>
+                <li>Upper thighs</li>
+            </ul>
+            <p><strong>Important:</strong> Rotate sites each week to prevent tissue damage.</p>
+
+            <h4>Step-by-Step Injection Process</h4>
+            <ul class="custom-list">
+                <li><strong>Prepare the site:</strong> Clean injection area with alcohol swab and allow 30 seconds to air dry completely</li>
+                <li><strong>Attach needle:</strong> Twist needle cap firmly onto pen until secure</li>
+                <li><strong>Inject:</strong> Hold pen at 45° angle to skin, pinch fatty tissue with free hand, insert needle completely in one smooth motion, press plunger slowly and hold for 5 seconds after full depression</li>
+                <li><strong>Remove:</strong> Remove needle and discard cap immediately in sharps container</li>
+                <li><strong>Post-injection:</strong> Return pen to refrigerator and monitor site for 24 hours</li>
+            </ul>
+
+            <div class="warning-box">
+                <p><strong>Note:</strong> Minor redness or tenderness is normal; excessive swelling, prolonged pain, or signs of infection require medical attention.</p>
+            </div>
+
+            <h3>Dietary Guidelines</h3>
+            
+            <p>Retatrutide slows gastric emptying, reducing appetite and extending satiety. To optimize results and minimize side effects, maintain these dietary practices:</p>
+
+            <h4>Essential Requirements</h4>
+            <ul class="custom-list">
+                <li><strong>Protein:</strong> Minimum 1.6g per kg of body weight daily. Include a protein source at every meal and prioritize lean proteins.</li>
+                <li><strong>Hydration:</strong> 2+ liters of water daily to prevent constipation and support metabolic processes.</li>
+                <li><strong>Fat moderation:</strong> Limit high-fat meals as excessive dietary fat combined with delayed gastric emptying may cause constipation.</li>
+                <li><strong>Lifestyle factors:</strong> Minimize alcohol consumption and reduce or eliminate smoking.</li>
+            </ul>
+
+            <h3>Dose Adjustment Protocol</h3>
+
+            <h4>Weekly Monitoring (Required)</h4>
+            <p>Track the following each week to inform dose adjustments:</p>
+            <ul class="custom-list">
+                <li>Progress photos (same lighting, time of day, clothing)</li>
+                <li>Body weight (same scale, same time, consistent conditions)</li>
+                <li>Dietary adherence (protein intake, meal quality)</li>
+                <li>Appetite patterns (particularly on day 7 post-injection)</li>
+            </ul>
+
+            <h4>Understanding the 4-Week Evaluation Period</h4>
+            <p><strong>Why wait 4 weeks?</strong> GLP-1 levels accumulate gradually over several weeks. Initial response does not indicate final efficacy at that dose. Full therapeutic effect requires 4 weeks of consistent administration.</p>
+
+            <p><strong>Key indicator:</strong> Increased hunger on day 7 (post-injection day) indicates the medication is effectively working during days 1-6, as retatrutide has a 6-day half-life.</p>
+
+            <h4>Adjustment Guidelines</h4>
+            <p>After 4 weeks at current dose:</p>
+            <ul class="custom-list">
+                <li>Increase by 2mg if results are insufficient</li>
+                <li>Decrease by 1mg if side effects are problematic</li>
+                <li>Maintain dose if results are satisfactory</li>
+            </ul>
+
+            <p><strong>Maximum dose:</strong> 10mg weekly. If unsatisfied at 10mg, contact our support team.</p>
+
+            <div class="warning-box">
+                <p><strong>Critical:</strong> Maintain consistent weekly dosing. Missing doses disrupts GLP-1 accumulation and reduces efficacy.</p>
+            </div>
+
+            <h3>Discontinuation Protocol</h3>
+
+            <h4>Temporary Use (Goal Weight Achievement)</h4>
+            <p>If discontinuing after reaching target weight:</p>
+            <p><strong>Tapering schedule (required):</strong> Reduce dose by 1mg per week until reaching 0mg.</p>
+            <p><strong>Do not discontinue abruptly.</strong> Abrupt cessation may cause gastrointestinal distress, rapid appetite increase, and energy fluctuations.</p>
+
+            <h4>Long-Term Use</h4>
+            <p>Retatrutide may be used indefinitely for sustained weight management, metabolic health benefits, appetite regulation, and cardiovascular protection. Continue healthy lifestyle practices and regular dosing for optimal long-term outcomes.</p>
+
+            <h3>Support & Questions</h3>
+            <p>For dosing concerns, side effects, or protocol adjustments, contact our Sydney-based support team at <strong>support@retaaustralia.com.au</strong></p>
+        </div>
+    </section>
+
+    <!-- Dosing Table -->
+    <section class="story">
+        <div class="story-container">
+            <h2>Dosing Reference Table</h2>
+            <div class="dosing-table-container">
+                <table class="dosing-table">
+                    <thead>
+                        <tr>
+                            <th>Dosage (mg)</th>
+                            <th>Pen Clicks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1mg</strong></td>
+                            <td>8 Clicks</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2mg</strong></td>
+                            <td>16 Clicks</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4mg</strong></td>
+                            <td>32 Clicks</td>
+                        </tr>
+                        <tr>
+                            <td><strong>6mg</strong></td>
+                            <td>48 Clicks</td>
+                        </tr>
+                        <tr>
+                            <td><strong>8mg</strong></td>
+                            <td>64 Clicks</td>
+                        </tr>
+                        <tr>
+                            <td><strong>10mg</strong> (Full Pen)</td>
+                            <td>80 Clicks</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to Start Your Protocol?</h2>
+        <p>Get your pharmaceutical-grade retatrutide pen with complete protocol support.</p>
+        <a href="product.html" class="btn-light">Order Now</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="product.html">Retatrutide Pen</a></li>
+                    <li><a href="dosing.html">Dosing & Protocol</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Reta Australia. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+    function toggleMenu(e) {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        const menu = document.getElementById('navLinks');
+        const body = document.body;
+        
+        menu.classList.toggle('active');
+        body.classList.toggle('menu-open');
+        
+        const spans = document.querySelectorAll('.mobile-menu-btn span');
+        if (menu.classList.contains('active')) {
+            spans[0].style.transform = "rotate(45deg) translate(5px, 5px)";
+            spans[1].style.opacity = "0";
+            spans[2].style.transform = "rotate(-45deg) translate(5px, -5px)";
+        } else {
+            spans[0].style.transform = "none";
+            spans[1].style.opacity = "1";
+            spans[2].style.transform = "none";
+        }
+        return false;
+    }
+
+    document.addEventListener('click', function(e) {
+        const menu = document.getElementById('navLinks');
+        const btn = document.querySelector('.mobile-menu-btn');
+        
+        if (menu.classList.contains('active') && 
+            !menu.contains(e.target) && 
+            !btn.contains(e.target)) {
+            toggleMenu();
+        }
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', function() {
+            if (window.innerWidth <= 968) {
+                toggleMenu();
+            }
+        });
+    });
+    </script>
+</body>
+</html>

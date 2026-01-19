@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service | Reta Australia</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        :root { --primary: #1e5a9e; --dark: #1a1a1a; --accent: #ffd700; --success: #2e7d32; --light: #f8fafc; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+
+        /* Navigation Logic */
+        nav { background: white; padding: 0rem 5%; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; width: 100%; height: 80px; z-index: 3000; }
+        .nav-container { height: 80px; max-width: 1250px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; text-decoration: none; }
+        .logo img { max-height: 150px; width: auto; transition: transform 0.3s ease; }
+        .nav-links { display: flex; list-style: none; }
+        .nav-links a { text-decoration: none; color: #333; font-weight: 700; padding: 0 1.5rem; height: 80px; display: flex; align-items: center; }
+        .cta-nav { background: var(--primary); color: white !important; border-radius: 25px; height: 45px !important; align-self: center; }
+
+        /* Terms Content Styles */
+        .terms-hero { background: linear-gradient(135deg, #1e5a9e 0%, #164a82 100%); padding: 4rem 5%; text-align: center; color: white; }
+        .terms-container { max-width: 900px; margin: 4rem auto; padding: 0 1.5rem; }
+        .terms-section { margin-bottom: 2.5rem; }
+        .terms-section h2 { color: var(--primary); margin-bottom: 1rem; border-bottom: 2px solid #eee; padding-bottom: 0.5rem; font-size: 1.5rem; }
+        .terms-section p { margin-bottom: 1rem; color: #555; }
+        .terms-section strong { color: var(--dark); }
+
+        /* Footer Logic */
+        .site-footer { background: #1a1a1a; color: white; padding: 4rem 5% 2rem; margin-top: 4rem; }
+        .footer-container { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+        .footer-section h4 { margin-bottom: 1.5rem; color: var(--primary); }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: #ccc; text-decoration: none; font-size: 0.95rem; }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid #333; color: #888; margin-top: 3rem; }
+
+        /* Mobile Menu */
+        .mobile-menu-btn { display: none; flex-direction: column; gap: 5px; background: transparent; border: none; cursor: pointer; }
+        .mobile-menu-btn span { width: 25px; height: 3px; background: var(--primary); border-radius: 3px; }
+
+        @media (max-width: 968px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: flex; }
+            .footer-container { grid-template-columns: 1fr; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo"><img src="logo.png" alt="Reta Australia Logo"></a>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="product.html">Product</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="product.html" class="cta-nav">Buy Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="terms-hero">
+        <h1>Terms of Service</h1>
+        <p>Last Updated: January 2026</p>
+    </header>
+
+    <main class="terms-container">
+        <section class="terms-section">
+            <h2>1. Agreement to Terms</h2>
+            <p>By accessing the website at <strong>retaaustralia.com.au</strong>, you agree to be bound by these terms of service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local Australian laws.</p>
+        </section>
+
+        <section class="terms-section">
+            <h2>2. Use License & Product Disclaimer</h2>
+            <p>Products provided by Reta Australia (Amana Therapeutics) are intended for laboratory research and personal metabolic tracking use. By purchasing, you acknowledge:</p>
+            <ul>
+                <li>You are at least 18 years of age.</li>
+                <li>Our products are not intended to diagnose, treat, or cure any specific medical condition without professional supervision.</li>
+                <li>Information provided on this site is for educational purposes and does not constitute medical advice.</li>
+            </ul>
+        </section>
+
+        <section class="terms-section">
+            <h2>3. Limitations of Liability</h2>
+            <p>In no event shall Reta Australia or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Reta Australia's website.</p>
+        </section>
+
+        <section class="terms-section">
+            <h2>4. Accuracy of Materials</h2>
+            <p>The materials appearing on Reta Australia's website could include technical, typographical, or photographic errors. Reta Australia does not warrant that any of the materials on its website are accurate, complete or current. We may make changes to the materials contained on its website at any time without notice.</p>
+        </section>
+
+        <section class="terms-section">
+            <h2>5. Governing Law</h2>
+            <p>These terms and conditions are governed by and construed in accordance with the laws of New South Wales, Australia and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.</p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="product.html">Retatrutide Pen</a></li>
+                    <li><a href="dosing.html">Dosing & Protocol</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Reta Australia. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('navLinks');
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+            if(menu.style.display === 'flex') {
+                menu.style.flexDirection = 'column';
+                menu.style.position = 'absolute';
+                menu.style.top = '80px';
+                menu.style.right = '0';
+                menu.style.background = 'white';
+                menu.style.width = '100%';
+                menu.style.zIndex = '4000';
+                menu.style.boxShadow = '0 5px 10px rgba(0,0,0,0.1)';
+            }
+        }
+    </script>
+</body>
+</html>

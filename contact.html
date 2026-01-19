@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <style>
+        :root { --primary: #1e5a9e; --dark: #1a1a1a; --accent: #ffd700; --success: #2e7d32; --light: #f8fafc; }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            line-height: 1.6; 
+            color: #333;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* Navigation Bar */
+        nav { 
+            background: white; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+            position: sticky; 
+            top: 0; 
+            width: 100%; 
+            height: 80px; 
+            z-index: 3000; 
+            padding: 0 5%;
+        }
+
+        .nav-container { 
+            height: 100%; 
+            max-width: 1250px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: relative;
+        }
+
+        /* LOGO */
+        .logo { 
+            display: flex; 
+            align-items: center; 
+            text-decoration: none; 
+            height: 100%; 
+            z-index: 3001; 
+        }
+        .logo img { 
+            height: auto; 
+            max-height: 150px; /* Scaled to fit 80px bar */
+            width: auto; 
+            display: block; 
+        }
+
+        /* DESKTOP MENU - Restoration */
+        .nav-links { 
+            display: flex; 
+            list-style: none; 
+            align-items: center; 
+            gap: 1rem;
+        }
+
+        .nav-links a { 
+            text-decoration: none; 
+            color: #333; 
+            font-weight: 700; 
+            padding: 0 1rem; 
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover { color: var(--primary); }
+
+        .cta-nav { 
+            background: var(--primary); 
+            color: white !important; 
+            padding: 0.7rem 1.5rem !important; 
+            border-radius: 25px; 
+        }
+
+        /* HAMBURGER BUTTON */
+        .mobile-menu-btn { 
+            display: none; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 5px; 
+            width: 44px; 
+            height: 44px; 
+            border: none !important;
+            background: transparent !important; 
+            -webkit-appearance: none;
+            -webkit-tap-highlight-color: transparent;
+            cursor: pointer; 
+            z-index: 5000;
+            position: relative;
+        }
+        
+        .mobile-menu-btn span { 
+            display: block; 
+            width: 25px; 
+            height: 3px; 
+            background-color: var(--primary); 
+            border-radius: 3px; 
+            transition: all 0.3s ease; 
+        }
+
+        /* MOBILE STYLES */
+        @media (max-width: 968px) {
+            .mobile-menu-btn { display: flex; }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 80%; 
+                max-width: 300px;
+                height: 100vh;
+                background: white !important;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start; 
+                padding-top: 100px; 
+                box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+                z-index: 4000; /* Above overlay */
+                transform: translateX(100%); 
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .nav-links.active { transform: translateX(0); display: flex; }
+            .nav-links li { width: 100%; }
+            .nav-links a { width: 100%; display: block; padding: 1.2rem 2rem; border-bottom: 1px solid #f0f0f0; }
+
+            .mobile-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+            .mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
+            .mobile-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+            .menu-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5); 
+                z-index: 1000;
+                opacity: 0;
+                visibility: hidden;
+                transition: 0.3s;
+                backdrop-filter: blur(2px);
+            }
+            
+            body.menu-open .menu-overlay { opacity: 1; visibility: visible; }
+            body.menu-open { overflow: hidden; }
+        }
+
+        /* CONTACT SECTION STYLES */
+        .contact-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 3rem; 
+            max-width: 1200px; 
+            margin: 4rem auto; 
+            padding: 0 1.5rem; 
+        }
+
+        @media(min-width: 768px) { .contact-grid { grid-template-columns: 1fr 1.5fr; } }
+
+        .contact-info h2 { font-size: 2.5rem; color: var(--dark); margin-bottom: 1rem; }
+        .info-item { margin-bottom: 1.5rem; display: flex; align-items: flex-start; gap: 1rem; }
+        .info-icon { color: var(--primary); font-size: 1.5rem; }
+
+        .contact-form { 
+            background: white; 
+            padding: 2.5rem; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+            border: 1px solid #eee;
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 700; font-size: 0.9rem; }
+        .form-group input, .form-group textarea { 
+            width: 100%; padding: 0.8rem; border: 2px solid #eee; border-radius: 10px; font-family: inherit; transition: 0.3s;
+        }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); }
+        
+        .btn-primary { 
+            background: var(--primary); color: white; padding: 1rem; border: none; border-radius: 10px; 
+            font-weight: 700; cursor: pointer; transition: background 0.3s; width: 100%;
+        }
+        .btn-primary:hover { background: #164a82; }
+
+        /* Footer */
+        .site-footer { background: #1a1a1a; color: white; padding: 4rem 5% 2rem; margin-top: 4rem; }
+        .footer-container { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+        .footer-section h4 { margin-bottom: 1.5rem; color: var(--primary); }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: #ccc; text-decoration: none; }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid #333; margin-top: 3rem; color: #888; }
+
+        @media (max-width: 768px) { .footer-container { grid-template-columns: 1fr; text-align: center; } }
+    </style>
+</head>
+<body>
+    
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Reta Australia Logo">
+            </a>
+
+            <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="product.html">Product</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="dosing.html">Dosing & Protocol</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="product.html" class="cta-nav">Buy Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="contact-grid">
+        <div class="contact-info">
+            <h2>Get in Touch</h2>
+            <p style="margin-bottom: 2rem; color: #666;">Still have questions? Our team is here to help.</p>
+            
+            <div class="info-item">
+                <span class="info-icon">✉️</span>
+                <div>
+                    <strong>Email Support</strong>
+                    <p>support@retaaustralia.com.au</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem; padding: 1.5rem; background: #f0f7ff; border-radius: 15px; border-left: 5px solid var(--primary);">
+                <p style="font-size: 0.9rem;"><strong>Note on Discretion:</strong> All communications are encrypted and private. We never share your data.</p>
+            </div>
+        </div>
+
+        <form class="contact-form" action="https://formspree.io/f/mojjdqbe" method="POST">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" name="name" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="john@example.com" required>
+            </div>
+            <div class="form-group">
+                <label>Subject</label>
+                <input type="text" name="subject" placeholder="Question about Batch #2026-A1">
+            </div>
+            <div class="form-group">
+                <label>Message</label>
+                <textarea name="message" rows="5" placeholder="How can we help you?" required></textarea>
+            </div>
+            <button type="submit" class="btn-primary">Send Message</button>
+        </form>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="product.html">Retatrutide Pen</a></li>
+                    <li><a href="dosing.html">Dosing & Protocol</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2026 Reta Australia. All rights reserved.</p></div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('mobileMenuBtn');
+            const menu = document.getElementById('navLinks');
+            const overlay = document.getElementById('menuOverlay');
+            const body = document.body;
+
+            function toggleMenu() {
+                menu.classList.toggle('active');
+                menuBtn.classList.toggle('active');
+                body.classList.toggle('menu-open');
+            }
+
+            menuBtn.addEventListener('click', toggleMenu);
+            overlay.addEventListener('click', toggleMenu);
+            
+            // Handle form submission logic
+            const contactForm = document.querySelector('.contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const submitBtn = contactForm.querySelector('button');
+                    const originalText = submitBtn.textContent;
+                    const formData = new FormData(contactForm);
+
+                    try {
+                        submitBtn.textContent = 'Sending...';
+                        submitBtn.disabled = true;
+                        const response = await fetch(contactForm.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: { 'Accept': 'application/json' }
+                        });
+
+                        if (response.ok) {
+                            contactForm.innerHTML = `<div style="text-align: center; padding: 2rem;">
+                                <h3 style="color: #1e5a9e; margin-bottom: 1rem;">Message Sent!</h3>
+                                <p>Thank you. Our team will get back to you shortly.</p>
+                            </div>`;
+                        } else { throw new Error('Error'); }
+                    } catch (err) {
+                        alert("Connection error. Please email us directly at support@retaaustralia.com.au");
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

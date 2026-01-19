@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ</title>
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="shortcut icon" href="favicon.ico">
+
+    <style>
+ :root { --primary: #1e5a9e; --dark: #1a1a1a; --accent: #ffd700; --success: #2e7d32; --light: #f8fafc; }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* Navigation */
+        nav { 
+    background: white; 
+    padding: 0rem 5%; /* Reduced from 1.5rem to 0.5rem */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+    position: sticky; 
+    position: -webkit-sticky;
+    width: 100%;
+    height: 80px;
+    top: 0; 
+    z-index: 3000; 
+}
+        .nav-container { height: 80px; max-width: 1250px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo img {
+    height: 100%; /* Change this number to your desired size (e.g., 150px or 200px) */
+max-height: 150px;
+    width: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+/* Optional: Subtle hover effect */
+.logo:hover img {
+    transform: scale(1.02);
+}
+        .nav-links { display: flex; list-style: none; margin: 0; padding: 0; }
+        .nav-links li{ display: flex; align-items: center;}
+        .nav-links a { text-decoration: none; color: #333; font-weight: 700; padding: 0 1.5rem; height: 80px; display: flex; align-items: center; }
+        @media (max-width: 968px) { .nav-links { display: none; } }
+
+/* Hamburger Button */
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: transparent;
+    cursor: pointer !important;
+    z-index: 2001;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.mobile-menu-btn span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #1e5a9e;
+    border-radius: 3px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+        
+        .cta-nav {
+            background: #1e5a9e;
+            color: white !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+        }
+        
+        .cta-nav:hover {
+            background: #164a82;
+            color: white !important;
+        }
+
+        /* Hero Section */
+        .page-hero {
+            background: linear-gradient(135deg, #1e5a9e 0%, #164a82 100%);
+            padding: 4rem 5%;
+            text-align: center;
+            color: white;
+        }
+
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* FAQ Categories */
+        .faq-nav {
+            background: white;
+            padding: 2rem 5%;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .faq-nav-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .faq-nav-item {
+            color: #666;
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .faq-nav-item:hover,
+        .faq-nav-item.active {
+            background: #e3f2fd;
+            color: #1e5a9e;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 4rem 5%;
+            background: #fafafa;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .category-title {
+            font-size: 2rem;
+            color: #1a1a1a;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #1e5a9e;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1a1a1a;
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #f8f8f8;
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: #1e5a9e;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 0 1.5rem 1.5rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .faq-answer-content p {
+            margin-bottom: 1rem;
+        }
+
+        .faq-answer-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .faq-answer-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Box */
+        .contact-box {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 3rem;
+            border: 2px solid #e3f2fd;
+        }
+
+        .contact-box h3 {
+            font-size: 1.5rem;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .contact-box p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-primary {
+            background: #1e5a9e;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: #164a82;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+
+/* Consolidated Footer Styles */
+.site-footer {
+    background: #1a1a1a;
+    color: white;
+    padding: 4rem 5% 2rem;
+    margin-top: 4rem;
+}
+
+.footer-container {
+    max-width: 1100px; /* Slightly tighter for 3 columns */
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* THREE EQUAL COLUMNS */
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-section h4 {
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+    font-size: 1.1rem;
+
+    letter-spacing: 1px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-section a {
+    color: #ccc;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 0.95rem;
+}
+
+.footer-section a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid #333;
+    color: #888;
+    font-size: 0.9rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .footer-container {
+        grid-template-columns: 1fr; /* Stacked for mobile */
+        text-align: center;
+        gap: 2.5rem;
+    }
+    
+    .footer-section h4 {
+        margin-bottom: 1rem;
+    }
+}
+
+       @media (max-width: 968px) {
+    .mobile-menu-btn { 
+        display: flex !important;
+    }
+
+    .nav-links {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 80%;
+        height: 100vh;
+        background: white !important;
+        flex-direction: column;
+        padding: 100px 0 20px 0;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+        z-index: 2000 !important;
+        overflow-y: auto;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+    }
+
+    .nav-links.active {
+        display: flex !important;
+        transform: translateX(0);
+    }
+
+    .nav-links li {
+        width: 100%;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .nav-links a {
+        width: 100%;
+        padding: 1.2rem 2rem;
+        height: auto;
+        font-size: 1.1rem;
+        justify-content: flex-start;
+    }
+
+    .nav-links a:hover {
+        background: #f8f8f8;
+    }
+
+    .nav-links .cta-nav {
+        margin: 1.5rem 2rem;
+        text-align: center;
+        display: block;
+        width: calc(100% - 4rem);
+        padding: 1rem;
+        border-radius: 25px;
+    }
+
+    body.menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 1999;
+    }
+
+
+    .page-hero h1 {
+        font-size: 2rem;
+    }
+
+    .faq-nav-container {
+        gap: 1rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+
+    <nav>
+        <div class="nav-container">
+            
+<a href="index.html" class="logo"><img src="logo.png" alt="Reta Australia Logo"></a>
+
+<button type="button" class="mobile-menu-btn" onclick="toggleMenu(event)" aria-label="Toggle Navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="product.html">Product</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="dosing.html">Dosing & Protocol</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="product.html" class="cta-nav">Buy Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="page-hero">
+        <h1>Frequently Asked Questions</h1>
+        <p>Find answers to common questions about our product</p>
+    </section>
+
+    <!-- FAQ Navigation -->
+    <div class="faq-nav">
+        <div class="faq-nav-container">
+            <a href="#product-info" class="faq-nav-item active">Product Info</a>
+            <a href="#usage" class="faq-nav-item">Usage & Dosage</a>
+            <a href="#shipping" class="faq-nav-item">Common Misconceptions</a>
+            <a href="#safety" class="faq-nav-item">Shipping</a>
+        </div>
+    </div>
+
+    <!-- FAQ Sections -->
+    <section class="faq-section">
+        <div class="faq-container">
+            
+            <!-- Product Information -->
+            <div id="product-info">
+                <h2 class="category-title">Product Information</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do the Retatrutide pens work?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>The pens come <strong>pre-loaded</strong> with 10mg of retatrutide dissolved in bacteriostatic solution to keep it sterile for safe use. You simply <strong>twist</strong> on a tiny needle cap (provided in your kit), <strong>dial</strong> your desired dose on the pen (<strong>8 clicks per 1mg</strong>) and <strong>inject</strong> subcutaneously (into fat) in your belly or thighs. For more detail see our Dosing and Protocol page.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Why does no one else sell pens?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Pens require more attention to manufacture and ship, requiring sterile production setup and quick shipping times to preserve the integrity of the product. Whereas our <strong>competitors</strong> mass ship dozens of different products in <strong>inconvenient vial form</strong> for customers, <strong>we have dedicated</strong> our work to providing the most <strong>convenient and accessible</strong> product in Australia.</p>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Are there side effects and how do I avoid them?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Different people experience different things. Most people suffer <strong>no meaningful side effects</strong> at all, and retatrutide is the <strong>most well-tolerated</strong> GLP-1 agonist on the market. The most common include constipation and lethargy. The best way <strong>to avoid</strong> these (or any side effects) is to <strong>increase your dosing slowly</strong> so as to take the lowest possible dose giving you your desired effects. It is also important to <strong>drink lots of water</strong>, and if constipated, to <strong>reduce fat</strong> intake as retatrutide slows your digestion to keep you fuller for longer.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I store my pen?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>In the <strong>fridge</strong> between 2-8°C</p>
+                        </div>
+                    </div>
+                </div>
+
+
+              
+            <!-- Usage & Dosage -->
+            <div id="usage" style="margin-top: 3rem;">
+                <h2 class="category-title">Usage & Dosage</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How much do I take?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>The <strong>starting dose is 2mg taken once a week</strong>, preferably at night (to avoid nausea), giving you 5 weeks of retatrutide from your first pen. Then you will <strong>re-evaluate</strong> to determine whether you want to <strong>maintain</strong> that dose, <strong>or increase</strong>. Repeat this re-evaluation every 4 weeks when changing your dose, <strong>either increasing by 2mg or decreasing by 1mg</strong>. You should not exceed 10mg a week, and should contact us if you are taking this dose and are unhappy with how you are feeling.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Will I feel the effects immediately?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Most customers report feeling effects <strong>within the first two weeks</strong>, but you may feel it after your first dose. It is important to be patient as <strong>the levels of GLP-1 build up in your body over the course of several weeks</strong>, and so the full consistent appetite reducing effect will take place over this time. You can be <strong>assured the retatrutide is working when on the 7th day after an injection you feel noticeably hungrier than previous days</strong>. This is because retatrutide has a half-life of 6 days, and so the drop of its effects is felt on the 7th day which is why injection takes place once a week.</p>
+
+       <div class="center-product-img">
+            <img src="buildup.png" alt="Product" style="width: 100%; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
+
+                        </div>
+                    </div>
+                </div>
+
+  <div class="faq-item">
+                    <div class="faq-question">
+                        How long until I see results?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Retatrutide has both <strong>metabolic benefits</strong> in body recomposition (preserving muscle and burning fat) as well as <strong>appetite reducing</strong> effects, usually making themselves apparent after the first <strong>4-6 weeks</strong>. Depending on your diet and exercise, <strong>you may notice certain results before others</strong>. An <strong>inactive</strong> but heavily dieting individual may <strong>see heavy losses on the scale before</strong> they notice more muscle tone in the <strong>mirror</strong>. An <strong>active</strong> but less strict dieter may <strong>see a leaner look in the mirror before</strong> noticing significant change on the <strong>scale</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+                          </div>
+
+            <!-- Common Misconceptions -->
+            <div id="shipping" style="margin-top: 3rem;">
+                <h2 class="category-title">Common Misconceptions</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Will I get Ozempic Face/lose muscle?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                           
+                            <p>Ozempic face is simply the <strong>loss of weight occuring too fast</strong> for the skin to re-adjust, causing gauntness. It is <strong>NOT</strong> specific to GLP-1 agonists, and not caused by them, <strong>but rather inadequate dieting strategy</strong>. Ozempic face (and muscle loss in general) can be <strong>entirely avoided by maintaining adequate protein intake (we recommend ~1.6g/kg of bodyweight), not dosing so high that you are barely eating, and staying active</strong> (preferably resistance training 3x a week). <strong>Retatrutide</strong> is the most muscle-preserving GLP-1 agonist, choosing instead to burn fat, which is why it shows <strong>negligible loss or even slight gains in muscle mass</strong> for people losing weight.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Will I gain all the weight back if I stop taking retatrutide?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>As long as you <strong>maintain appropriate eating habits</strong>, cessation of retatrutide <strong>will not cause you to gain weight</strong> back in any unique way. If eating returns to as it was in an obese condition then the same result will follow. This is why <strong>practitioners are now viewing GLP-1 agonists as obesity medications</strong> in the same light as other chronic conditions, that being that <strong>to treat a chronic condition, medication must be taken chronically </strong>(indefinitely). </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do I have to stay on retatrutide forever?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p><strong>No.</strong> Whilst retatrutide long-term shows <strong>cardio-protective (heart healthy) and metabolic benefits</strong>, ceasing retatrutide will only deny you the benefits of taking it, and is not harmful in any way. The most current research however shows that <strong>years-long GLP-1 agonist use may permanently benefit appetite control</strong> in patients even after cessation by boosting leptin levels.</p>
+                        </div>
+                    </div>
+                </div>
+
+            
+            <!-- Shipping -->
+            <div id="safety" style="margin-top: 3rem;">
+                <h2 class="category-title">Shipping</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Where do you ship from? Could customs sieze my package? 
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>We ship straight from <strong>Australia</strong> using Australian Post, meaning Customs is not involved in any way and your package is <strong>guaranteed to arrive</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How long will my package take to arrive?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Packages are sent on the same or next day as the order, meaning delivery is usually fulfilled within <strong>1-2 days</strong> (or 3-5 depending on if ordered over the weekend).</p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Will I get tracking information?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>You will get an AusPost tracking number emailed as soon as it's been shipped.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            <!-- Contact Box -->
+            <div class="contact-box">
+                <h3>Still Have Questions?</h3>
+                <p>Our customer support team is here to help. Reach out to us anytime.</p>
+                <a href="contact.html" class="btn-primary">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h4>Product</h4>
+            <ul>
+                <li><a href="product.html">Retatrutide Pen</a></li>
+                <li><a href="dosing.html">Dosing & Protocol</a></li>
+
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Support</h4>
+            <ul>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="faq.html">FAQs</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Legal</h4>
+            <ul>
+
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Reta Australia. All rights reserved.</p>
+    </div>
+</footer>
+
+    <script>
+        // FAQ Toggle functionality
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all other items
+                faqItems.forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                });
+                
+                // Toggle current item
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+function toggleMenu(e) {
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    
+    const menu = document.getElementById('navLinks');
+    const body = document.body;
+    
+    menu.classList.toggle('active');
+    body.classList.toggle('menu-open');
+    
+    const spans = document.querySelectorAll('.mobile-menu-btn span');
+    if (menu.classList.contains('active')) {
+        spans[0].style.transform = "rotate(45deg) translate(5px, 5px)";
+        spans[1].style.opacity = "0";
+        spans[2].style.transform = "rotate(-45deg) translate(5px, -5px)";
+    } else {
+        spans[0].style.transform = "none";
+        spans[1].style.opacity = "1";
+        spans[2].style.transform = "none";
+    }
+    return false;
+}
+
+// Close menu when clicking outside
+document.addEventListener('click', function(e) {
+    const menu = document.getElementById('navLinks');
+    const btn = document.querySelector('.mobile-menu-btn');
+    
+    if (menu.classList.contains('active') && 
+        !menu.contains(e.target) && 
+        !btn.contains(e.target)) {
+        toggleMenu();
+    }
+});
+
+// Close menu when clicking a link
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', function() {
+        if (window.innerWidth <= 968) {
+            toggleMenu();
+        }
+    });
+});
+</script>
+   
+</body>
+</html>

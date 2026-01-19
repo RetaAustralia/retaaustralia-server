@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMANA Therapeutics</title>
+
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="shortcut icon" href="favicon.ico">
+
+<style>
+    /* 1. SHARED BASE STYLES */
+    .feature-icon-card {
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+    
+    .center-product-img img {
+        display: block;
+        margin: 0 auto;
+        transition: all 0.5s ease;
+    }
+
+    /* 2. DESKTOP MODE (Screen wider than 969px) */
+    @media (min-width: 969px) {
+        .feature-container-wrapper {
+            position: relative;
+            min-height: 650px; /* Ensure enough room for absolute elements */
+            display: block; /* Disable grid for desktop surround look */
+        }
+
+        .feature-icon-card {
+            position: absolute; /* Only absolute on desktop */
+            max-width: 180px;
+        }
+
+        /* Precise Positioning for the "Surround" look */
+        .card-tl { top: 10%; left: 0; }
+        .card-tr { top: 10%; right: 0; }
+        .card-bl { bottom: 10%; left: 0; }
+        .card-br { bottom: 10%; right: 0; }
+
+        .center-product-img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+        }
+        
+        .center-product-img img { max-width: 450px; }
+    }
+
+    /* 3. MOBILE MODE (Screen 968px and below) */
+    @media (max-width: 968px) {
+        .feature-container-wrapper {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr; 
+            grid-template-areas: 
+                "topleft topright"
+                "center center"
+                "botleft botright";
+            gap: 30px 15px;
+            padding: 2rem 1rem;
+            min-height: auto !important;
+        }
+
+        .feature-icon-card {
+            position: relative !important; /* Switch to relative for Grid */
+            max-width: 100% !important;
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .card-tl { grid-area: topleft; }
+        .card-tr { grid-area: topright; }
+        .card-bl { grid-area: botleft; }
+        .card-br { grid-area: botright; }
+
+        .center-product-img {
+            grid-area: center;
+            padding: 20px 0;
+        }
+
+        .center-product-img img {
+            max-width: 280px !important;
+        }
+
+        .feature-icon-card h4 { font-size: 0.85rem !important; margin-top: 10px; }
+        .feature-icon-card p { font-size: 0.75rem !important; line-height: 1.3; }
+    }
+
+/* Universal Font Standardisation */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+body { 
+    line-height: 1.6; 
+    color: #333; 
+    -webkit-font-smoothing: antialiased; /* Makes text look crisper on Macs */
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* Hero (Balanced & Centered) */
+        .hero { background: linear-gradient(135deg, #f0f7ff 0%, #e3f2fd 100%); padding: 5rem 1.5rem; text-align: center; }
+        .hero h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); line-height: 1.1; margin-bottom: 1.5rem; color: var(--dark); }
+        .hero p { max-width: 700px; margin: 0 auto 2.5rem; font-size: 1.2rem; color: #555; }
+
+        /* Trust Bar */
+        .trust-bar { background: white; padding: 2rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1000px; margin: -40px auto 3rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        @media(min-width: 768px) { .trust-bar { grid-template-columns: repeat(4, 1fr); } }
+        .trust-item { text-align: center; font-size: 0.85rem; font-weight: 700; color: var(--primary); }
+
+        
+        :root { --primary: #1e5a9e; --dark: #1a1a1a; --accent: #ffd700; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; color: #333; }
+        nav { background: white; padding: 0 5%; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; 
+    position: -webkit-sticky;
+    width: 100%;
+    height: 80px; top: 0; z-index: 3000; }
+        .nav-container { height: 80px; max-width: 1250px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+      
+        .hero { background: linear-gradient(135deg, #f0f7ff 0%, #e3f2fd 100%); padding: 8rem 5%; text-align: center; }
+        .hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1.5rem; color: var(--dark); }
+        .btn { display: inline-block; padding: 1.2rem 2.5rem; border-radius: 50px; font-weight: 800; text-decoration: none; transition: 0.3s; background: var(--primary); color: white; }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            
+<a href="index.html" class="logo"><img src="logo.png" alt="Reta Australia Logo"></a>
+
+<button type="button" class="mobile-menu-btn" onclick="toggleMenu(event)" aria-label="Toggle Navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="product.html">Product</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="dosing.html">Dosing & Protocol</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+<!-- Full Width Banner -->
+<section style="position: relative; width: 100%; height: 600px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+    <!-- Background Image -->
+    <img src="product2.png" alt="Banner" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+    
+    <!-- Dark Overlay (optional, for text readability) -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 2;"></div>
+    
+    <!-- Banner Content -->
+    <div style="position: relative; z-index: 3; text-align: center; color: white;">
+        <h2 style="font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; margin-bottom: 2rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.5);">
+            Premium Retatrutide Pens
+        </h2>
+ <p>The most effective weight management product on the market, more convenient than ever</p>
+        <a href="product.html" class="btn" style="background: var(--primary); color: white; padding: 1.2rem 3rem; border-radius: 50px; font-size: 1.2rem; font-weight: 700; text-decoration: none; display: inline-block; box-shadow: 0 5px 20px rgba(0,0,0,0.3); margin-top:50px;">
+            Get Yours Now →
+        </a>
+    </div>
+</section>
+
+    
+
+  <!-- Bigger Trust Elements (like your examples) -->
+<div style="background: white; padding: 4rem 5%; margin-top: -3rem;">
+    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem;">
+        
+        <div style="text-align: center;">
+            <div style="width: 100px; height: 100px; background: #f0f7ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 3rem;">
+                🧪
+            </div>
+            <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--dark);">THIRD-PARTY LAB TESTED</h3>
+            <p style="color: #666; font-size: 0.95rem;">We provide our customers with safety tested products certified at >99% purity.</p>
+        </div>
+
+        <div style="text-align: center;">
+            <div style="width: 100px; height: 100px; background: #f0f7ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 3rem;">
+                🎧
+            </div>
+            <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--dark);">HANDS-ON SUPPORT</h3>
+            <p style="color: #666; font-size: 0.95rem;">Guaranteed customer service from beginning to end, guiding you step-by-step to make everything as easy as possible.</p>
+        </div>
+
+        
+            
+        <div style="text-align: center;">
+            <div style="width: 100px; height: 100px; background: #f0f7ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 3rem;">
+                🇦🇺
+            </div>
+            <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--dark);">EXPRESS DOMESTIC SHIPPING</h3>
+            <p style="color: #666; font-size: 0.95rem;">Fast customs-safe delivery sent from within Australia, so you never have to worry about your package not arriving.</p>
+        </div>
+
+    </div>
+</div>
+
+
+<section style="padding: 6rem 5%; background: #f8fafc; overflow: hidden;">
+    <div class="feature-container-wrapper" style="max-width: 1100px; margin: 0 auto;">
+        
+        <div class="center-product-img">
+            <img src="product1.png" alt="Product" style="width: 100%; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
+        </div>
+
+        <div class="feature-icon-card card-tl">
+            <div style="width: 60px; height: 60px; background: #1e5a9e; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                <span style="font-size: 1.5rem;">💪</span>
+            </div>
+            <h4 style="font-weight: 800; color: #1e5a9e; margin: 10px 0;">METABOLIC SUPPORT</h4>
+            <p style="color: #666;">Enhanced metabolic function and muscle preservation.</p>
+        </div>
+
+        <div class="feature-icon-card card-tr">
+            <div style="width: 60px; height: 60px; background: #1e5a9e; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                <span style="font-size: 1.5rem;">🔬</span>
+            </div>
+            <h4 style="font-weight: 800; color: #1e5a9e; margin: 10px 0;">3RD PARTY TESTED</h4>
+            <p style="color: #666;">99% purity confirmed by Certificates of Analysis from professional laboratories.</p>
+        </div>
+
+        <div class="feature-icon-card card-bl">
+            <div style="width: 60px; height: 60px; background: #1e5a9e; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                <span style="font-size: 1.5rem;">👌</span>
+            </div>
+            <h4 style="font-weight: 800; color: #1e5a9e; margin: 10px 0;">CONVENIENT PEN</h4>
+            <p style="color: #666;">The most accessible form of Retatrutide available.</p>
+        </div>
+
+        <div class="feature-icon-card card-br">
+            <div style="width: 60px; height: 60px; background: #1e5a9e; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                <span style="font-size: 1.5rem;">💲</span>
+            </div>
+            <h4 style="font-weight: 800; color: #1e5a9e; margin: 10px 0;">BANG FOR BUCK</h4>
+            <p style="color: #666;">Find a comparable product at a better price and we'll beat it by 10%.</p>
+        </div>
+
+    </div>
+</section>
+
+
+            
+        
+
+      
+    </div>
+</section>
+
+    </div>
+</section>
+
+
+
+  <!-- Reviews Section -->
+<section style="padding: 5rem 5%; background: #f8fafc;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+        
+        <h2 style="text-align: center; font-size: 2.5rem; font-weight: 800; margin-bottom: 3rem; color: var(--dark);">
+            What Our Customers Say
+        </h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            
+            <!-- Review 1 -->
+            <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border-left: 4px solid #1e5a9e;">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+
+                    <div>
+                        <div style="font-weight: 700; color: var(--dark); margin-bottom: 0.3rem;">Sarah J.</div>
+                        <div style="color: #ffa726; font-size: 1.1rem;">★★★★★</div>
+                        <div style="display: inline-block; background: #4caf50; color: white; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: 600; margin-top: 0.3rem;">✓ VERIFIED BUYER</div>
+                    </div>
+                </div>
+                <p style="color: #555; font-style: italic; line-height: 1.7; margin-bottom: 1rem;">
+                    "The package came exactly as it looked and support was very helpful.."
+                </p>
+                <div style="color: #1e5a9e; font-weight: 700; font-size: 0.95rem;">-8kg in 2.5 months</div>
+            </div>
+
+            <!-- Review 2 -->
+            <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border-left: 4px solid #1e5a9e;">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+
+                    <div>
+                        <div style="font-weight: 700; color: var(--dark); margin-bottom: 0.3rem;">MT.</div>
+                        <div style="color: #ffa726; font-size: 1.1rem;">★★★★★</div>
+                        <div style="display: inline-block; background: #4caf50; color: white; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: 600; margin-top: 0.3rem;">✓ VERIFIED BUYER</div>
+                    </div>
+                </div>
+                <p style="color: #555; font-style: italic; line-height: 1.7; margin-bottom: 1rem;">
+                    "Came in 2 days. Couldnt be easier."
+                </p>
+                <div style="color: #1e5a9e; font-weight: 700; font-size: 0.95rem;">-18kg in 14 weeks</div>
+            </div>
+
+            <!-- Review 3 -->
+            <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border-left: 4px solid #1e5a9e;">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+
+                    <div>
+                        <div style="font-weight: 700; color: var(--dark); margin-bottom: 0.3rem;">charaganda.</div>
+                        <div style="color: #ffa726; font-size: 1.1rem;">★★★★★</div>
+                        <div style="display: inline-block; background: #4caf50; color: white; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: 600; margin-top: 0.3rem;">✓ VERIFIED BUYER</div>
+                    </div>
+                </div>
+                <p style="color: #555; font-style: italic; line-height: 1.7; margin-bottom: 1rem;">
+                    "I am on second pen now, use every week, and my stomach is slimmer and my hunger is less."
+                </p>
+                <div style="color: #1e5a9e; font-weight: 700; font-size: 0.95rem;">-15kg in 12 weeks</div>
+            </div>
+
+        </div>
+
+        <!-- View More Button (optional) -->
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="product.html" style="display: inline-block; color: #1e5a9e; font-weight: 700; text-decoration: none; padding: 0.8rem 2rem; border: 2px solid #1e5a9e; border-radius: 30px; transition: 0.3s;">
+                View More Reviews →
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- Final CTA -->
+    
+
+<section style="padding: 6rem 5%; background: linear-gradient(135deg, #1e5a9e 0%, #164a82 100%); color: white; text-align: center; font-family: 'Montserrat', sans-serif;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+        
+        <div style="margin-top: 3rem;">
+            <h3 style="font-size: 2rem; font-weight: 700; margin-bottom: 1.5rem;">
+                Ready to Experience the Difference?
+            </h3>
+            
+            <a href="product.html" style="display: inline-block; background: white; color: #1e5a9e; padding: 1.5rem 4rem; border-radius: 50px; font-size: 1.3rem; font-weight: 800; text-decoration: none; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: transform 0.3s;">
+                Get Yours Now →
+            </a>
+            
+            <p style="margin-top: 1.5rem; opacity: 0.8; font-size: 0.95rem;">
+                Free express shipping on all orders over $400 • 100% satisfaction guarantee
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h4>Product</h4>
+            <ul>
+                <li><a href="product.html">Retatrutide Pen</a></li>
+                <li><a href="dosing.html">Dosing & Protocol</a></li>
+
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Support</h4>
+            <ul>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="faq.html">FAQs</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Legal</h4>
+            <ul>
+
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Reta Australia. All rights reserved.</p>
+    </div>
+</footer>
+/* Footer (Matches About/FAQ exactly) */
+      <style>  
+/* Consolidated Footer Styles */
+.site-footer {
+    background: #1a1a1a;
+    color: white;
+    padding: 4rem 5% 2rem;
+    margin-top: 4rem;
+}
+
+.footer-container {
+    max-width: 1100px; /* Slightly tighter for 3 columns */
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* THREE EQUAL COLUMNS */
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-section h4 {
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+    font-size: 1.1rem;
+
+    letter-spacing: 1px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-section a {
+    color: #ccc;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 0.95rem;
+}
+
+.footer-section a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid #333;
+    color: #888;
+    font-size: 0.9rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .footer-container {
+        grid-template-columns: 1fr; /* Stacked for mobile */
+        text-align: center;
+        gap: 2.5rem;
+    }
+    
+    .footer-section h4 {
+        margin-bottom: 1rem;
+    }
+}
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo img {
+    height: 100%; /* Change this number to your desired size (e.g., 150px or 200px) */
+max-height: 150px;
+    width: auto;
+    display: block;
+margin-top: 0px;
+margin-bottom: 0px;
+
+    transition: transform 0.3s ease;
+}
+
+/* Optional: Subtle hover effect */
+.logo:hover img {
+    transform: scale(1.02);
+}
+        .nav-links { display: flex; list-style: none; margin: 0; padding: 0; }
+        .nav-links li{ display: flex; align-items: center;}
+        .nav-links a { text-decoration: none; color: #333; font-weight: 700; padding: 0 1.5rem; height: 80px; display: flex; align-items: center; }
+@media (max-width: 968px) {
+    .mobile-menu-btn { 
+        display: flex !important;
+    }
+
+    .nav-links {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 80%;
+        height: 100vh;
+        background: white !important;
+        flex-direction: column;
+        padding: 100px 0 20px 0;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+        z-index: 2000 !important;
+        overflow-y: auto;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+    }
+
+    .nav-links.active {
+        display: flex !important;
+        transform: translateX(0);
+    }
+
+    .nav-links li {
+        width: 100%;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .nav-links a {
+        width: 100%;
+        padding: 1.2rem 2rem;
+        height: auto;
+        font-size: 1.1rem;
+        justify-content: flex-start;
+    }
+
+    .nav-links a:hover {
+        background: #f8f8f8;
+    }
+
+    .nav-links .cta-nav {
+        margin: 1.5rem 2rem;
+        text-align: center;
+        display: block;
+        width: calc(100% - 4rem);
+        padding: 1rem;
+        border-radius: 25px;
+    }
+
+    body.menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 1999;
+    }
+
+
+
+    .page-hero h1 {
+        font-size: 2rem;
+    }
+
+    .faq-nav-container {
+        gap: 1rem;
+    }
+}
+
+/* Hamburger Button */
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: transparent;
+    cursor: pointer !important;
+    z-index: 2001;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.mobile-menu-btn span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #1e5a9e;
+    border-radius: 3px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+</style>
+<script>
+function toggleMenu(e) {
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    
+    const menu = document.getElementById('navLinks');
+    const body = document.body;
+    
+    menu.classList.toggle('active');
+    body.classList.toggle('menu-open');
+    
+    const spans = document.querySelectorAll('.mobile-menu-btn span');
+    if (menu.classList.contains('active')) {
+        spans[0].style.transform = "rotate(45deg) translate(5px, 5px)";
+        spans[1].style.opacity = "0";
+        spans[2].style.transform = "rotate(-45deg) translate(5px, -5px)";
+    } else {
+        spans[0].style.transform = "none";
+        spans[1].style.opacity = "1";
+        spans[2].style.transform = "none";
+    }
+    return false;
+}
+
+// Close menu when clicking outside
+document.addEventListener('click', function(e) {
+    const menu = document.getElementById('navLinks');
+    const btn = document.querySelector('.mobile-menu-btn');
+    
+    if (menu.classList.contains('active') && 
+        !menu.contains(e.target) && 
+        !btn.contains(e.target)) {
+        toggleMenu();
+    }
+});
+
+// Close menu when clicking a link
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', function() {
+        if (window.innerWidth <= 968) {
+            toggleMenu();
+        }
+    });
+});
+</script>
+</body>
+</html>

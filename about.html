@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        :root { --primary: #1e5a9e; --dark: #1a1a1a; --accent: #ffd700; --success: #2e7d32; --light: #f8fafc; }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            line-height: 1.6; 
+            color: #333;
+            overflow-x: hidden; 
+            width: 100%;
+        }
+
+        /* Navigation Bar */
+        nav { 
+            background: white; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+            position: sticky; 
+            top: 0; 
+            width: 100%; 
+            height: 80px; 
+            z-index: 3000; 
+            padding: 0 5%;
+        }
+
+        .nav-container { 
+            height: 100%; 
+            max-width: 1250px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: relative;
+        }
+
+        /* LOGO */
+        .logo { 
+            display: flex; 
+            align-items: center; 
+            text-decoration: none; 
+            height: 100%; 
+            z-index: 3001; 
+            position: relative; /* Ensure it doesn't overlap button hit area */
+        }
+        .logo img { 
+            height: auto; 
+            max-height: 150px; 
+            width: auto; 
+            display: block; 
+        }
+
+        /* DESKTOP MENU */
+        .nav-links { 
+            display: flex; 
+            list-style: none; 
+            align-items: center; 
+            gap: 1rem;
+        }
+
+        .nav-links a { 
+            text-decoration: none; 
+            color: #333; 
+            font-weight: 700; 
+            padding: 0 1rem; 
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover { color: var(--primary); }
+
+        .cta-nav { 
+            background: var(--primary); 
+            color: white !important; 
+            padding: 0.7rem 1.5rem !important; 
+            border-radius: 25px; 
+            transition: background 0.3s;
+        }
+        .cta-nav:hover { background: #164a82; }
+
+        /* HAMBURGER BUTTON - AGGRESSIVE RESET */
+        .mobile-menu-btn { 
+            display: none; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 5px; 
+            width: 44px; 
+            height: 44px; 
+            
+            /* RESET NATIVE STYLES */
+            border: none !important;
+            outline: none !important;
+            background: transparent !important; 
+            background-color: transparent !important;
+            box-shadow: none !important;
+            appearance: none !important;
+            -webkit-appearance: none !important;
+            -moz-appearance: none !important;
+            
+            /* REMOVE GREY TAP HIGHLIGHT */
+            -webkit-tap-highlight-color: transparent !important;
+            
+            cursor: pointer; 
+            z-index: 9999; /* Highest priority to ensure clickability */
+            position: relative;
+        }
+        
+        .mobile-menu-btn span { 
+            display: block; 
+            width: 25px; 
+            height: 3px; 
+            background-color: var(--primary); 
+            border-radius: 3px; 
+            transition: all 0.3s ease; 
+            pointer-events: none; /* Ensures clicks pass through the lines to the button */
+        }
+
+        /* MOBILE STYLES */
+        @media (max-width: 968px) {
+            .mobile-menu-btn { display: flex; }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 80%; 
+                max-width: 300px;
+                height: 100vh;
+                background: white !important;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start; 
+                padding-top: 100px; 
+                box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+                z-index: 2000;
+                
+                transform: translateX(100%); 
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .nav-links.active {
+                transform: translateX(0); 
+                display: flex; 
+            }
+
+            .nav-links li { width: 100%; }
+            
+            .nav-links a { 
+                width: 100%; 
+                display: block;
+                padding: 1.2rem 2rem; 
+                border-bottom: 1px solid #f0f0f0;
+                font-size: 1.1rem;
+            }
+
+            .nav-links .cta-nav {
+                margin: 2rem auto;
+                width: 80%;
+                text-align: center;
+                display: block;
+                padding: 1rem !important;
+            }
+
+            /* Hamburger Animation */
+            .mobile-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+            .mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
+            .mobile-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+            /* Overlay */
+            .menu-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5); 
+                z-index: 1000;
+                opacity: 0;
+                visibility: hidden;
+                transition: 0.3s;
+                backdrop-filter: blur(2px);
+            }
+            /* Add overlay behind menu */
+body.menu-open::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1999; /* Menu is 2000, so this stays behind */
+}
+            body.menu-open .menu-overlay {
+                opacity: 1;
+                visibility: visible;
+            }
+            body.menu-open { overflow: hidden; }
+        }
+
+        /* PAGE CONTENT STYLES */
+        .page-hero { background: linear-gradient(135deg, #1e5a9e 0%, #164a82 100%); padding: 5rem 5%; text-align: center; color: white; }
+        .page-hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+        .page-hero p { font-size: 1.3rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
+        
+        .story, .mission, .team, .certifications { padding: 5rem 5%; }
+        .story-container, .mission-container, .cert-container { max-width: 900px; margin: 0 auto; }
+        
+        /* General Headers */
+        .story h2, .mission h2, .certifications h2 { 
+            font-size: 2.5rem; 
+            color: #1a1a1a; 
+            margin-bottom: 2rem; 
+            text-align: center; 
+        }
+        
+        .story p { font-size: 1.1rem; color: #555; margin-bottom: 1.5rem; line-height: 1.8; }
+        .mission { background: #f0f7ff; }
+        .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; margin-top: 3rem; }
+        .value-card { background: white; padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
+        .value-icon { width: 70px; height: 70px; background: #e3f2fd; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; }
+        .certifications { background: #fafafa; }
+        .cert-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        .cert-item { background: white; padding: 2rem; border-radius: 15px; display: flex; align-items: start; gap: 1.5rem; box-shadow: 0 3px 15px rgba(0,0,0,0.05); }
+        .cert-icon { width: 60px; height: 60px; background: #e3f2fd; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; flex-shrink: 0; }
+        
+        /* CTA SECTION FIXES */
+        .cta-section { 
+            background: linear-gradient(135deg, #1e5a9e 0%, #164a82 100%); 
+            padding: 6rem 5%; 
+            text-align: center; 
+            color: white; 
+        }
+        
+        .cta-section h2 { 
+            font-size: 2.5rem; 
+            margin-bottom: 1.5rem;
+            color: white !important; 
+        }
+        
+        .cta-section p { 
+            font-size: 1.2rem; 
+            margin-bottom: 3rem; 
+            opacity: 0.9; 
+            color: white;
+        }
+        
+        .btn-light { background: white; color: #1e5a9e; padding: 1rem 2.5rem; border: none; border-radius: 30px; font-size: 1.1rem; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s; }
+        .btn-light:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3); }
+
+        /* Footer */
+        .site-footer { background: #1a1a1a; color: white; padding: 4rem 5% 2rem; margin-top: 4rem; }
+        .footer-container { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; margin-bottom: 3rem; }
+        .footer-section h4 { margin-bottom: 1.5rem; color: var(--primary); font-size: 1.1rem; letter-spacing: 1px; }
+        .footer-section ul { list-style: none; }
+        .footer-section ul li { margin-bottom: 0.8rem; }
+        .footer-section a { color: #ccc; text-decoration: none; transition: 0.3s; font-size: 0.95rem; }
+        .footer-section a:hover { color: white; }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid #333; color: #888; font-size: 0.9rem; max-width: 1100px; margin: 0 auto; }
+
+        @media (max-width: 968px) {
+            .values-grid, .cert-list, .footer-container { grid-template-columns: 1fr; }
+            .page-hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Reta Australia Logo">
+            </a>
+
+            <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="product.html">Product</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="dosing.html">Dosing & Protocol</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="product.html" class="cta-nav">Buy Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <h1>Our Story</h1>
+        <p>Committed to helping you achieve your health goals naturally and safely</p>
+    </section>
+
+    <section class="story">
+        <div class="story-container">
+            <h2>Our Origins</h2>
+            <p>
+                AMANA Therapeutics was founded on the principle that life-changing metabolic treatments should be defined by their results, not the complexity of their administration. Having witnessed the profound metabolic and appetite-regulating benefits of Retatrutide, we also recognized a significant barrier to patient adherence: the traditional, clinical requirement of vials and manual syringes. To many, these methods felt unnecessarily complex and intimidating.
+            </p>
+          <h3>Our Commitment to Precision</h3>
+            <p>
+                We dedicated our mission to re-engineering the user experience. Inspired by the gold-standard delivery systems used by global pharmaceutical leaders, we developed a streamlined pen-injector system designed for safety, comfort, and accessibility. Every pen undergoes rigorous calibration testing and is filled by experienced professionals within a sterile, controlled environment to ensure absolute dosing accuracy. To guarantee maximum peptide potency, our products are prepared and dispatched immediately upon order, providing you with a seamless and high-purity path to your health objectives.. 
+            </p>
+        </div>
+    </section>
+
+    <section class="mission">
+        <div class="mission-container">
+            <h2>Our Mission & Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">💚</div>
+                    <h3>Quality First</h3>
+                    <p>We never compromise on ingredient quality or manufacturing standards. Every batch is tested for purity and potency.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🔬</div>
+                    <h3>Science-Based</h3>
+                    <p>Our formulations are backed by scientific research and clinical studies to ensure real, measurable results.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🤝</div>
+                    <h3>Customer Care</h3>
+                    <p>Your success is our success. We're here to support you every step of your health journey with honest guidance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="certifications">
+        <h2>Certifications & Standards</h2>
+        <div class="cert-container">
+            <div class="cert-list">
+                <div class="cert-item">
+                    <div class="cert-icon">✓</div>
+                    <div class="cert-info">
+                        <h3>GMP Certified</h3>
+                        <p>Manufactured in facilities that follow Good Manufacturing Practice standards for quality and safety.</p>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">✓</div>
+                    <div class="cert-info">
+                        <h3>Third-Party Verified</h3>
+                        <p>Every batch is independently tested by accredited laboratories to verify purity and potency.</p>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">✓</div>
+                    <div class="cert-info">
+                        <h3>Endotoxin Tested</h3>
+                        <p>The only retatrutide supply checked for endotoxin, with each batch requiring a passing grade before supplied.</p>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">✓</div>
+                    <div class="cert-info">
+                        <h3>HPLC LCMS Validated</h3>
+                        <p>We source only the highest quality retatrutide and the processing to match.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Ready to Start Your Journey?</h2>
+        <p>Experience the difference of a scientifically formulated, naturally effective supplement.</p>
+        <a href="#buy" class="btn-light">Shop Now</a>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="product.html">Retatrutide Pen</a></li>
+                    <li><a href="dosing.html">Dosing & Protocol</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Reta Australia. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Use modern Event Listeners for better reliability
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('mobileMenuBtn');
+            const menu = document.getElementById('navLinks');
+            const overlay = document.getElementById('menuOverlay');
+            const body = document.body;
+
+            function toggleMenu(e) {
+                // Prevent default behavior just in case
+                if(e) e.preventDefault();
+                
+                menu.classList.toggle('active');
+                menuBtn.classList.toggle('active');
+                body.classList.toggle('menu-open');
+            }
+
+            // Close menu when clicking outside (on overlay)
+            overlay.addEventListener('click', toggleMenu);
+            
+            // Toggle menu on button click
+            menuBtn.addEventListener('click', toggleMenu);
+        });
+    </script>
+</body>
+</html>
