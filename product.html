@@ -128,7 +128,7 @@ max-height: 150px;
  /* Comparison Table */
     .comparison-section { padding: 5rem 5%; background: white; }
     .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: var(--dark); }
-    .comp-table { width: 100%; max-width: 900px; margin: 50px auto; border-collapse: separate; border-spacing: 5px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+
     .comp-table th, .comp-table td { padding: 1.5rem; border: 1px solid #eee; text-align: center; }
     .comp-table th { background: #f8fafc; font-weight: 700; color: var(--primary); }
 
@@ -166,6 +166,30 @@ max-height: 150px;
 
     .check-yes { color: #2e7d32; font-weight: bold; }
     .check-no { color: #999; }
+
+/* PASTE THIS: Table with room for the 'Scale' effect */
+.comp-table { 
+    width: 92%; /* Reduced from 100% to stop the right-side shift */
+    max-width: 900px; 
+    margin: 50px auto; 
+    border-collapse: separate; 
+    border-spacing: 5px 0; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* PASTE THIS AT THE BOTTOM: Specific Mobile Fix */
+@media screen and (max-width: 768px) {
+    .comp-table {
+        width: 88%; /* Even narrower on mobile to ensure centering */
+        font-size: 0.85rem; /* Shrink text slightly so it fits small screens */
+    }
+    .comp-table th, .comp-table td {
+        padding: 0.8rem 0.4rem; /* Smaller padding so columns don't crowd each other */
+    }
+    .comp-table th:nth-child(2), .comp-table td:nth-child(2) {
+        transform: scale(1.03); /* Slightly less 'pop' on mobile to prevent overlap */
+    }
+}
 
         /* Testimonials Carousel */
         .carousel { overflow: hidden; position: relative; max-width: 700px; margin: 0 auto; }
@@ -336,6 +360,8 @@ max-height: 150px;
 <body>
 
 
+<div style="height: 45px;"></div>
+
     <nav>
         <div class="nav-container">
             
@@ -358,6 +384,26 @@ max-height: 150px;
         </div>
     </nav>
 
+<div style="
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    background-color: #fcf8e3; 
+    color: #8a6d3b; 
+    text-align: center; 
+    padding: 10px 5px; 
+    font-size: 13px; 
+    font-weight: bold; 
+    border-bottom: 2px solid #faebcc; 
+    z-index: 9999;
+    font-family: sans-serif;
+">
+    ⚠️ ATTENTION: All products are for laboratory research use only. NOT FOR HUMAN OR ANIMAL CONSUMPTION.
+</div>
+
+
+
    
     <section id="buy" class="product-grid">
         <div>
@@ -372,8 +418,8 @@ max-height: 150px;
             </div>
         </div>
         <div>
-            <span style="color: var(--primary); font-weight: 800; font-size: 0.8rem;">BATCH #2026-A1 NOW AVAILABLE</span>
-            <h2 style="font-size: 2.5rem; margin: 0.5rem 0;">Reta Protocol Kit</h2>
+            <span style="color: var(--primary); font-weight: 800; font-size: 0.8rem;">BATCH #BN-26RT10-001 NOW AVAILABLE</span>
+            <h2 style="font-size: 2.5rem; margin: 0.5rem 0;">Retatrutide Kit</h2>
             <div style="font-size: 2.2rem; color: var(--primary); font-weight: 900; margin-bottom: 1.5rem;">$249.00 AUD</div>
             
 <div class="review-summary">
@@ -400,7 +446,7 @@ max-height: 150px;
     
     <h3 style="color: var(--primary); margin-bottom: 1rem;">What It Is</h3>
     <p style="margin-bottom: 1.5rem;">
-        <strong>Retatrutide</strong> is the latest evolution in metabolic research. As a <strong>Triple-Agonist peptide</strong>, it goes beyond traditional protocols by targeting three distinct hormonal pathways simultaneously. This results in a more comprehensive approach to metabolic regulation and weight management than previously possible with single or dual-action peptides.
+        <strong>Retatrutide</strong> is a <strong>Triple-Agonist peptide</strong> compound of significant interest in metabolic research.It functions by targeting three distinct hormonal pathways simultaneously. This results in a more comprehensive approach to metabolic regulation and weight management than previously possible with single or dual-action peptides.
     </p>
 
     <h3 style="color: var(--primary); margin-bottom: 1rem;">What It Does</h3>
@@ -420,9 +466,9 @@ max-height: 150px;
     
 
     <h3 style="color: var(--primary); margin-bottom: 1rem;">What You Will Receive</h3>
-    <p style="margin-bottom: 1rem;">Your AMANA Therapeutics Retatrutide Kit is a complete, pharmaceutical-grade solution:</p>
+    <p style="margin-bottom: 1rem;">Your AMANA Therapeutics Research Kit is a complete, pharmaceutical-grade solution:</p>
     <ul style="list-style: none; margin-bottom: 1.5rem; padding-left: 0;">
-        <li style="margin-bottom: 8px;">✅ <strong>10mg of 99.8% Purity Retatrutide</strong></li>
+        <li style="margin-bottom: 8px;">✅ <strong>10mg of 99.8% Purity Retatrutide</strong> (Research Grade)</li>
         <li style="margin-bottom: 8px;">✅ <strong>Convenient, Pre-filled Injection Pen</strong> (No manual mixing required)</li>
         <li style="margin-bottom: 8px;">✅ <strong>5x Sterile Needle Caps</strong></li>
         <li style="margin-bottom: 8px;">✅ <strong>Unlimited 1-on-1 Customer Support Access</strong></li>
@@ -430,28 +476,31 @@ max-height: 150px;
 
     
 
-    <h3 style="color: var(--primary); margin-bottom: 1rem;">How To Use</h3>
+    <h3 style="color: var(--primary); margin-bottom: 1rem;">Administration Reference (Laboratory Use Only)</h3>
+<p>For researchers conducting studies with this compound:</p>
     <div style="background: #f8fafc; padding: 1.5rem; border-radius: 15px; border-left: 5px solid var(--primary);">
         <ol style="padding-left: 1.2rem;">
 
             <li style="margin-bottom: 10px;">
-                <strong>Load & Inject:</strong> Dial the pen 16 clicks to your starting dose of 2mg (<strong>8 clicks per 1mg of retatrutide</strong>) and inject <strong>once every 7 days</strong>.
+                <strong>Dosing:</strong> Research protocols typically employ doses of 2-10mg weekly. Dosing intervals and amounts vary by research protocol design. Researchers should consult published literature and institutional guidelines.
             </li>
             <li style="margin-bottom: 10px;">
-                <strong>Monitor Progress:</strong> Track your appetite and weight loss every 4 weeks.
+                <strong>Administration:</strong> Subcutaneous administration has been employed in research settings. Proper sterile technique is essential.
             </li>
             <li style="margin-bottom: 10px;">
-                <strong>Assess & Adjust:</strong> Use your 4-week data to determine if your current dose is appropriate or if an adjustment is required for continued progress.
+                <strong>Storage:</strong> Maintain at 2-8°C to preserve compound integrity.
             </li>
         </ol>
+<p>This information is provided for research professionals only. Users should be familiar with their institution's IRB approval and applicable regulations.</p>
     </div>
 
 </div>
         </div>
     </section>
  <section class="comparison-section">
-        <h2 class="section-title">Why Australians Choose Us</h2>
+        <h2 class="section-title">Why Researchers Choose Us</h2>
 
+        <div class="table-container">
         <table class="comp-table">
 
             <thead>
@@ -466,65 +515,71 @@ max-height: 150px;
                 <tr><td>Endotoxin Screened</td><td class="check-yes">✅ Yes</td><td class="check-no">❌ None</td></tr>
                 <tr><td>1-on-1 Hands-On Support</td><td class="check-yes">✅ Unlimited</td><td class="check-no">❌ Generic</td></tr>
                 <tr><td>Shipping Location</td><td class="check-yes">🇦🇺 Australian Stock</td><td class="check-no">🚢 Overseas</td></tr>
-                <tr><td>Pre-Set Pen</td><td class="check-yes">✅ The Only</td><td class="check-no">❌ DIY Vials</td></tr>
+                <tr><td>Delivery system</td><td class="check-yes">✅ Pre-filled Pen</td><td class="check-no">❌ Vials (Manual Preparation Required)</td></tr>
                 <tr><td>HPLC LCMS Validated</td><td class="check-yes">✅ Every Time</td><td class="check-no">❓ Unknown</td></tr>
-                <tr><td>Extra needles and water required?</td><td class="check-yes" style="color: var(--primary); font-weight: 800;">👍 NO</td><td style="color: #f44336; font-weight: 800;">$$$ YES</td></tr>
+
             </tbody>
         </table>
-    </section>
-
-    <section style="padding: 4rem 1.5rem; background: #fafafa;">
-        <h2 style="text-align: center; margin-bottom: 3rem;">Verified Success Stories</h2>
-        <div class="carousel">
-            <div class="track" id="track">
-                <div class="slide">
-                    <img src="testimonial1.png" class="user-img">
-                    <div style="color: var(--accent); margin-bottom: 10px;">★★★★★</div>
-                    <div style="background: #e8f5e9; color: var(--success); display: inline-block; padding: 4px 12px; border-radius: 20px; font-weight: 800; font-size: 0.8rem; margin-bottom: 1rem;">RESULT: 8kg Lost!</div>
-                    <p>"The package came exactly as it looked and support was very helpful."</p>
-                    <div style="font-weight: 800; margin-top: 1rem;">Sarah J. | Verified Purchase</div>
-                </div>
-                <div class="slide">
-                    <img src="testimonial2.png" class="user-img">
-                    <div style="color: var(--accent); margin-bottom: 10px;">★★★★★</div>
-                    <div style="background: #e8f5e9; color: var(--success); display: inline-block; padding: 4px 12px; border-radius: 20px; font-weight: 800; font-size: 0.8rem; margin-bottom: 1rem;">RESULT: Lost Fat Gained Muscle</div>
-                    <p>"Came in 2 days. Couldnt be easier. "</p>
-                    <div style="font-weight: 800; margin-top: 1rem;">MT. | Verified Purchase</div>
-                </div>
-
-                <div class="slide">
-                    <img src="user-mark.jpg" class="user-img">
-                    <div style="color: var(--accent); margin-bottom: 10px;">★★★★★</div>
-                    <div style="background: #e8f5e9; color: var(--success); display: inline-block; padding: 4px 12px; border-radius: 20px; font-weight: 800; font-size: 0.8rem; margin-bottom: 1rem;">RESULT: Losing Belly Fat</div>
-                    <p>"I am on second pen now, use every week, and my stomach is slimmer and hunger is less "</p>
-                    <div style="font-weight: 800; margin-top: 1rem;">charaganda. | Verified Purchase</div>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 2rem;">
-                <button onclick="moveSlide(-1)" style="padding: 10px; cursor: pointer;">←</button>
-                <button onclick="moveSlide(1)" style="padding: 10px; cursor: pointer;">→</button>
-            </div>
-        </div>
+</div>
     </section>
 
     <section style="padding: 4rem 1.5rem;">
-        <h2 style="text-align: center; margin-bottom: 3rem;">Common Questions</h2>
+<div style="max-width: 900px; margin: 0 auto; padding: 0 5%; text-align: center;">
+    <h2 style="margin-bottom: 1rem; position: relative; display: inline-block; width: 100%;">
+        Common Questions
+    </h2>
+    <div style="width: 100%; height: 3px; background: var(--primary); margin-bottom: 3rem;"></div>
+</div>
         <div class="faq-item">
             <button class="faq-btn" onclick="toggleFaq(this)">How do Retatrutide pens work? <span>+</span></button>
-            <div class="faq-content"><p style="padding-bottom: 1rem;">The pens come <strong>pre-loaded</strong> with 10mg of retatrutide dissolved in bacteriostatic solution to keep it sterile for safe use. You simply <strong>twist</strong> on a tiny needle cap (provided in your kit), <strong>dial</strong> your desired dose (8 clicks per 1mg) on the pen and <strong>inject</strong> subcutaneously (into fat) in your belly or thighs. For more detail see our Dosing and Protocol page.</p></div>
+            <div class="faq-content"><p style="padding-bottom: 1rem;">The research-grade pens contain 10mg of retatrutide in sterile solution, provided in a <strong>pre-filled</strong> format to keep it sterile for safe laboratory use. Dial the pen 8 clicks per 1mg of retatrutide required for administration.</p></div>
         </div>
         <div class="faq-item">
             <button class="faq-btn" onclick="toggleFaq(this)">Do you ship within Australia? <span>+</span></button>
             <div class="faq-content"><p style="padding-bottom: 1rem;">Yes. All stock is held in Australia. We use Express Post for 1-3 day delivery nationwide.</p></div>
         </div>
 
-        <div style="text-align: center; margin-top: 4rem; background: #e6eaeb; color: black; padding: 4rem 2rem; border-radius: 20px;">
+        <div style="text-align: center; margin-top: 4rem; background: var(--primary); color: white; padding: 4rem 2rem; border-radius: 20px;">
             <h2>Still Have Questions?</h2>
             <p style="margin: 1rem 0 2rem; opacity: 0.8;">View our full <a href="faq.html" style="color: white; text-decoration: underline;">FAQ</a> or contact us for help.</p>
-            <a href="contact.html" class="btn" style="background: white; color: var(--dark);">Contact Us</a>
+            <a href="contact.html" class="btn" style="background: white; color: var(--primary);">Contact Us</a>
         </div>
     </section>
 
+<!-- RESEARCH USE ONLY NOTICE -->
+<div style="
+    background: linear-gradient(135deg, #fff3cd 0%, #ffe8a1 100%);
+    border-top: 5px solid #ff9800;
+    border-bottom: 5px solid #ff9800;
+    padding: 2.5rem 5%;
+    margin: 4rem 0 0 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+">
+    <div style="max-width: 1100px; margin: 0 auto;">
+        <div style="display: flex; align-items: flex-start; gap: 1.5rem;">
+            <div style="font-size: 2rem; flex-shrink: 0;">⚠️</div>
+            <div>
+                <h3 style="
+                    color: #e65100;
+                    font-size: 1.3rem;
+                    font-weight: 800;
+                    margin-bottom: 1rem;
+                    margin-top: 0;
+                ">
+                    RESEARCH USE ONLY NOTICE
+                </h3>
+                <p style="
+                    color: #bf360c;
+                    font-size: 0.95rem;
+                    line-height: 1.7;
+                    margin: 0;
+                ">
+                    AMANA Therapeutics products are intended for research and laboratory use only. Our compounds are not approved for human consumption and should not be used except by qualified researchers in appropriate institutional settings with proper regulatory approval (including IRB/ethics board approval where required). Users are solely responsible for ensuring compliance with all applicable laws and regulations in their jurisdiction.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 <footer class="site-footer">
     <div class="footer-container">
         <div class="footer-section">
@@ -659,5 +714,8 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     });
 });
     </script>
+<div style="background-color: #f8d7da; color: #721c24; padding: 15px; text-align: center; font-weight: bold; border: 1px solid #f5c6cb; margin-top: 20px;">
+    IMPORTANT: All products on this site are for laboratory research use only. NOT FOR HUMAN CONSUMPTION.
+</div>
 </body>
 </html>
